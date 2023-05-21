@@ -17,4 +17,4 @@ bot = commands.Bot(command_prefix='!')
 async def on_ready():
     print("Установка активности!") # увед. о начале работы
 
-bot.run(discord_token) #суда ваш токен
+bot.run(discord_token) 

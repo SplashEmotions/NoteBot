@@ -54,7 +54,7 @@ async def schedule(ctx):
         while True:
             current_time = datetime.now(pytz.timezone('Europe/Moscow')).strftime('%H:%M:%S')
             await bot.change_presence(activity=disnake.Game(name=f"Current time in Russia (Moscow): {current_time}"))
-            await disnake.utils.sleep_until(datetime.now() + timedelta(minutes=1))
+            await asyncio.sleep(60)  # Ожидаем 60 секунд
 
     # Запускаем задачу обновления времени
     bot.loop.create_task(update_time())
@@ -63,7 +63,7 @@ async def schedule(ctx):
     delta = scheduled_time - datetime.now()
 
     # Запускаем таймер и выполняем операцию по истечении времени
-    bot.loop.create_task(disnake.utils.sleep(delta.total_seconds()))
-    bot.loop.create_task(execute_operation())
+    await asyncio.sleep(delta.total_seconds())
+    await execute_operation()
 
 bot.run(discord_token)
